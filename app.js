@@ -23,7 +23,7 @@ var CFG = {
     online: "Olá, Ale! Tenho interesse no Fitness & Performance Advisory Online para a minha rotina. Podes apresentar-me a metodologia?"
   },
   nav: [
-    ["Sobre","#sobre"],["Áreas","#areas"],["Método 45min","#como-funciona"],["Modalidades","#modalidades"],["Programas","#planos"],["Diagnóstico","#questionario"],["FAQ","#faq"]
+    ["Sobre","#sobre"],["Áreas","#areas"],["Método 45min","#como-funciona"],["Diagnóstico","#questionario"],["Programas","#planos"],["Modalidades","#modalidades"],["FAQ","#faq"]
   ],
   /* título, descrição, ícone, destaque */
   focus: [

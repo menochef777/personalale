@@ -1392,30 +1392,47 @@ p { margin: 0; }
   background: rgba(52, 211, 153, 0.09);
 }
 
-/* Botão Enviar WhatsApp */
+/* Botão Agendar no Questionário — Quiet Luxury / Classe Rica */
 .btn-send {
-  background: #25D366 !important;
-  color: #FFFFFF !important;
-  border: 0 !important;
+  background: #FFFFFF !important;
+  color: #0A0A0A !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  font-family: var(--f-display) !important;
   font-weight: 700 !important;
-  font-size: 0.98rem !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
   border-radius: 999px !important;
-  padding: 14px 26px !important;
+  padding: 12px 24px !important;
+  min-height: 44px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px !important;
-  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.35) !important;
-  transition: transform .2s, box-shadow .2s, background .2s !important;
+  gap: 8px !important;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) !important;
+  cursor: pointer;
+  text-decoration: none;
 }
 .btn-send:hover {
-  background: #22BF5B !important;
+  background: #F4F4F5 !important;
+  border-color: #FFFFFF !important;
+  color: #000000 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.45) !important;
+  box-shadow: 0 8px 22px rgba(255, 255, 255, 0.2) !important;
+}
+.btn-send svg.wa-icon {
+  width: 15px !important;
+  height: 15px !important;
+  fill: #0A0A0A !important;
+  flex: none;
 }
 @media(max-width: 600px) {
   .btn-send {
-    width: 100% !important;
+    width: auto !important;
+    padding: 12px 22px !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.1em !important;
   }
 }
 
@@ -1900,27 +1917,31 @@ p { margin: 0; }
 .f-top-btn:hover { border-color: #FFFFFF; }
 .f-top-btn svg { width: 18px; height: 18px; transform: rotate(-90deg); }
 
-/* Floating WhatsApp */
+/* Floating WhatsApp — Luxury Understated */
 .wa {
   position: fixed;
-  right: 24px; bottom: 24px;
-  width: 56px; height: 56px;
+  right: 20px; bottom: 20px;
+  width: 48px; height: 48px;
   border-radius: 50%;
-  background: #111111;
+  background: rgba(18, 18, 22, 0.85);
   color: #FFFFFF;
-  border: 1.5px solid #27272A;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
   display: grid;
   place-items: center;
   z-index: 55;
-  transition: background .2s, transform .2s, border-color .2s;
+  transition: all .25s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .wa:hover {
-  background: #000000;
+  background: #FFFFFF;
+  color: #0A0A0A;
   border-color: #FFFFFF;
-  transform: scale(1.06);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
 }
-.wa svg { width: 28px; height: 28px; }
+.wa svg { width: 22px; height: 22px; }
 
 /* Media Queries Responsivas */
 @media(min-width: 600px) {

@@ -573,10 +573,12 @@ function render(focus){
       + summaryList().filter(function(q){ return q.key !== "contact"; }).map(function(q){ return '<li><b>'+esc(q.label)+'</b><span>'+esc(answerOf(q.key))+'</span><button type="button" data-edit="'+q.key+'" aria-label="Alterar '+esc(q.label)+'">Alterar</button></li>'; }).join("")
       + '</ul><p class="priv">Clica abaixo para abrir o WhatsApp oficial com o teu diagnóstico estruturado.</p>';
     nav.innerHTML = '<button type="button" class="back" id="q-back">Voltar</button><a class="btn btn-primary btn-send" id="q-send" href="' + wa(buildMessage()) + '" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg> Agendar Sessão Estratégica</a>';
-    sendFormSubmit();
   }
   stage.innerHTML = h;
   stage.classList.remove("in"); void stage.offsetWidth; stage.classList.add("in");
+  if(S.step >= list.length){
+    sendFormSubmit();
+  }
   if(focus){ var t = $("#q-title"); if(t) t.focus({preventScroll:true}); }
 }
 function go(n, focus){ S.step = n; render(focus); }

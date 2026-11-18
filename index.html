@@ -53,7 +53,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=20261118_v5">
+  <link rel="stylesheet" href="style.css?v=20261118_v6">
 </head>
 <body>
 
@@ -448,15 +448,60 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faq" id="faq" aria-labelledby="h-faq">
-      <div class="wrap">
-        <div class="intro" data-reveal>
-          <p class="kicker">Perguntas frequentes</p>
-          <h2 id="h-faq">Perguntas <em>frequentes.</em></h2>
-          <p class="lead muted">Tudo o que precisas de saber sobre o método de treino em 45 minutos e a Sessão Estratégica.</p>
+    <!-- FAQ (DESIGN MODERNO DARK COM SIDEBAR E CARDS INDIVIDUAIS) -->
+    <section class="faq-sec" id="faq" aria-labelledby="h-faq">
+      <div class="faq-wrap">
+        <!-- HEADER -->
+        <div class="faq-header">
+          <div class="faq-header-left" data-reveal>
+            <span class="faq-pill">
+              <span class="dot"></span>
+              FAQ
+            </span>
+            <h2 id="h-faq" class="faq-title">
+              Perguntas frequentes<br class="br-hide"> que mais recebemos.
+            </h2>
+          </div>
+          <div class="faq-header-right" data-reveal style="--d:0.15s">
+            <p class="faq-desc">
+              Tudo o que precisas de saber sobre o método de treino em 45 minutos, acompanhamento presencial em Portugal e consultoria executiva online.
+            </p>
+          </div>
         </div>
-        <div class="acc" id="acc" data-reveal style="--d:.1s"></div>
+
+        <!-- MAIN LAYOUT: SIDEBAR + ACCORDION CARDS -->
+        <div class="faq-body">
+          <!-- SIDEBAR ESQUERDA -->
+          <aside class="faq-sidebar" data-reveal style="--d:0.1s">
+            <!-- TABS DE CATEGORIAS -->
+            <div class="faq-tabs" role="tablist" aria-label="Categorias de Perguntas">
+              <button type="button" class="faq-tab active" data-cat="all" role="tab" aria-selected="true">
+                Geral
+              </button>
+              <button type="button" class="faq-tab" data-cat="metodo" role="tab" aria-selected="false">
+                Método 45min
+              </button>
+              <button type="button" class="faq-tab" data-cat="atendimento" role="tab" aria-selected="false">
+                Presencial &amp; Online
+              </button>
+            </div>
+
+            <!-- CARD "TENS DÚVIDAS?" -->
+            <div class="faq-help-card">
+              <h3 class="help-title">Tens dúvidas?</h3>
+              <p class="help-desc">
+                Precisas de ajuda ou queres esclarecer alguma questão específica sobre a tua rotina? Fala diretamente com o Ale.
+              </p>
+              <a href="#" class="help-link" data-wa="general" target="_blank" rel="noopener">
+                <span>Falar no WhatsApp</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </aside>
+
+          <!-- LISTA DE CARDS ACCORDION DIREITA -->
+          <div class="faq-list" id="faq-list" role="region" aria-label="Respostas às Perguntas Frequentes"></div>
+        </div>
       </div>
     </section>
 

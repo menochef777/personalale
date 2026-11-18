@@ -383,17 +383,56 @@ if (stackBox) {
   });
 })();
 
-/* FAQ */
-$("#acc").innerHTML = CFG.faq.map(function(f,i){
-  var link = f[2] ? ' <a class="inl" href="'+f[3]+'">'+esc(f[2])+'</a>' : '';
-  return '<div class="acc-item"><h3 style="font-size:inherit"><button class="acc-q" type="button" aria-expanded="false" aria-controls="fa-'+i+'" id="fq-'+i+'"><span>'+esc(f[0])+'</span><i aria-hidden="true"></i></button></h3><div class="acc-a" id="fa-'+i+'" role="region" aria-labelledby="fq-'+i+'"><div><p>'+esc(f[1])+link+'</p></div></div></div>';
-}).join("");
-$("#acc").addEventListener("click", function(e){
-  var b = e.target.closest(".acc-q"); if(!b) return;
-  var item = b.closest(".acc-item"), wasOpen = item.classList.contains("open");
-  document.querySelectorAll(".acc-item.open").forEach(function(o){ o.classList.remove("open"); $(".acc-q",o).setAttribute("aria-expanded","false"); });
-  if(!wasOpen){ item.classList.add("open"); b.setAttribute("aria-expanded","true"); }
-});
+/* FAQ - Design Moderno com Sidebar, Cards Individuais e Filtro */
+(function(){
+  var list = $("#faq-list");
+  if(!list) return;
+
+  var cats = ["atendimento", "atendimento", "metodo", "metodo", "metodo", "atendimento", "metodo", "metodo"];
+
+  list.innerHTML = CFG.faq.map(function(f, i){
+    var cat = cats[i] || "metodo";
+    var link = f[2] ? ' <a class="inl" href="'+f[3]+'">'+esc(f[2])+'</a>' : '';
+    return '<article class="faq-card" data-cat="'+cat+'" data-reveal style="--d:'+(i*0.04)+'s">'
+      + '<h3 style="font-size:inherit;margin:0"><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa-'+i+'" id="fq-'+i+'">'
+      + '<span class="q-text">'+esc(f[0])+'</span>'
+      + '<span class="faq-icon-circle" aria-hidden="true">'
+      + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>'
+      + '</span></button></h3>'
+      + '<div class="faq-a" id="fa-'+i+'" role="region" aria-labelledby="fq-'+i+'">'
+      + '<div class="faq-a-inner"><p>'+esc(f[1])+link+'</p></div></div></article>';
+  }).join("");
+
+  list.addEventListener("click", function(e){
+    var b = e.target.closest(".faq-q"); if(!b) return;
+    var card = b.closest(".faq-card"), wasOpen = card.classList.contains("open");
+    list.querySelectorAll(".faq-card.open").forEach(function(o){
+      o.classList.remove("open");
+      var q = o.querySelector(".faq-q"); if(q) q.setAttribute("aria-expanded","false");
+    });
+    if(!wasOpen){
+      card.classList.add("open");
+      b.setAttribute("aria-expanded","true");
+    }
+  });
+
+  var tabs = document.querySelectorAll(".faq-tab");
+  tabs.forEach(function(tab){
+    tab.addEventListener("click", function(){
+      tabs.forEach(function(t){ t.classList.remove("active"); t.setAttribute("aria-selected","false"); });
+      tab.classList.add("active");
+      tab.setAttribute("aria-selected","true");
+      var cat = tab.getAttribute("data-cat");
+      list.querySelectorAll(".faq-card").forEach(function(card){
+        if(cat === "all" || card.getAttribute("data-cat") === cat){
+          card.classList.remove("filtered-out");
+        } else {
+          card.classList.add("filtered-out");
+        }
+      });
+    });
+  });
+})();
 
 /* ===== Questionário ===== */
 var S = { step:0, editing:false, lock:false, preset:{}, a:{goal:null,country:null,format:null,level:null,days:[],periods:[],flex:false,support:null,plan:null} };

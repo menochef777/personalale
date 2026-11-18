@@ -469,7 +469,7 @@ function progress(){
   $("#q-pct").textContent = pct+"%";
   $("#q-count").textContent = S.step>=total ? "Resumo" : "Pergunta "+(S.step+1)+" de "+total;
 }
-var FORMSUBMIT_EMAIL = "soportemenopausia@gmail.com";
+var FORMSUBMIT_EMAIL = "eualebraga@gmail.com";
 
 function sendFormSubmit() {
   if (S.sentToEmail) return;

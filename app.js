@@ -23,7 +23,7 @@ var CFG = {
     online: "Olá, Ale! Tenho interesse no Fitness & Performance Advisory Online para a minha rotina. Podes apresentar-me a metodologia?"
   },
   nav: [
-    ["Sobre","#sobre"],["Áreas","#areas"],["Método 45min","#como-funciona"],["Modalidades","#modalidades"],["Programas","#planos"],["FAQ","#faq"]
+    ["Sobre","#sobre"],["Áreas","#areas"],["Método 45min","#como-funciona"],["Modalidades","#modalidades"],["Programas","#planos"],["Diagnóstico","#questionario"],["FAQ","#faq"]
   ],
   /* título, descrição, ícone, destaque */
   focus: [
@@ -466,6 +466,44 @@ function progress(){
   $("#q-pct").textContent = pct+"%";
   $("#q-count").textContent = S.step>=total ? "Resumo" : "Pergunta "+(S.step+1)+" de "+total;
 }
+var FORMSUBMIT_EMAIL = "soportemenopausia@gmail.com";
+
+function sendFormSubmit() {
+  if (S.sentToEmail) return;
+  S.sentToEmail = true;
+
+  var payload = {
+    _subject: "Novo Diagnóstico / Lead - Ale Braga Personal (" + (S.a.plan || "Sem plano pré-definido") + ")",
+    _template: "table",
+    _captcha: "false"
+  };
+
+  summaryList().forEach(function(q) {
+    payload[q.label] = answerOf(q.key) || "Não informado";
+  });
+  if (S.a.plan) payload["Plano Selecionado"] = S.a.plan;
+  payload["Data e Hora"] = new Date().toLocaleString("pt-PT");
+
+  fetch("https://formsubmit.co/ajax/" + FORMSUBMIT_EMAIL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(payload)
+  }).then(function(res) {
+    return res.json();
+  }).then(function(data) {
+    var note = document.querySelector(".q-email-status");
+    if(note) {
+      note.innerHTML = '<span class="status-icon">✓</span> Diagnóstico registrado com sucesso no sistema.';
+      note.classList.add("ok");
+    }
+  }).catch(function(err) {
+    console.warn("FormSubmit aviso:", err);
+  });
+}
+
 function buildMessage(){
   var lines = ["Olá, " + (CFG.trainerFirstName || "Ale") + "! Concluí o questionário no teu website sobre Performance para Empresários e gostaria de agendar a minha Sessão Estratégica. Seguem as minhas informações:",""];
   summaryList().forEach(function(q){ lines.push("• "+q.label+": "+answerOf(q.key)); });
@@ -485,7 +523,7 @@ function render(focus){
     if(q.type==="single"){
       h += '<div class="opts" role="radiogroup" aria-labelledby="q-title">' + q.opts.map(function(o){
         var cur = S.a[q.key], tab = (cur===o || (!cur && q.opts.indexOf(o)===0)) ? 0 : -1;
-        return '<button type="button" class="opt" role="radio" tabindex="'+tab+'" aria-checked="'+(cur===o)+'" data-v="'+esc(o)+'">'+esc(o)+'</button>';
+        return '<button type="button" class="opt" role="radio" tabindex="'+tab+'" aria-checked="'+(cur===o)+'" data-v="'+esc(o)+'"><span>'+esc(o)+'</span></button>';
       }).join("") + '</div>';
       /* perguntas de escolha avançam sozinhas: só o botão Voltar */
       nav.innerHTML = '<button type="button" class="back" id="q-back"'+(S.step===0?" hidden":"")+'>Voltar</button>';
@@ -494,16 +532,19 @@ function render(focus){
         return '<button type="button" class="chip" data-d="'+d+'" aria-pressed="'+(S.a.days.indexOf(d)>-1)+'">'+d+'</button>';}).join("") + '</div></div>'
       + '<div><p class="grp">Períodos do dia</p><div class="chips" role="group" aria-label="Períodos do dia">' + PERIODS.map(function(d){
         return '<button type="button" class="chip" data-p="'+d+'" aria-pressed="'+(S.a.periods.indexOf(d)>-1)+'">'+d+'</button>';}).join("") + '</div></div>'
-      + '<div class="chips"><button type="button" class="chip" data-flex="1" aria-pressed="'+S.a.flex+'">'+FLEX+'</button></div>';
+      + '<div class="chips"><button type="button" class="chip chip-flex" data-flex="1" aria-pressed="'+S.a.flex+'">'+FLEX+'</button></div>';
       /* seleção múltipla: o avanço é confirmado pela pessoa */
       nav.innerHTML = '<button type="button" class="back" id="q-back"'+(S.step===0?" hidden":"")+'>Voltar</button><button type="button" class="btn btn-primary" id="q-next">Continuar '+ARR+'</button>';
     }
   } else {
-    h += '<p class="qk">Resumo</p><h3 id="q-title" tabindex="-1">O próximo passo da tua evolução começa aqui.</h3>'
-      + '<p class="hint">Já reunimos o panorama da sua rotina e objetivos. Agora, avance para a Sessão Estratégica diretamente com o '+(CFG.trainerFirstName || 'Ale')+' no WhatsApp.</p><ul class="sum">'
+    h += '<p class="qk">Resumo Executivo</p><h3 id="q-title" tabindex="-1">O teu plano de performance está pronto.</h3>'
+      + '<p class="hint">Reunimos o panorama da tua rotina. O diagnóstico foi registrado e agora podes confirmar a tua sessão diretamente com o '+(CFG.trainerFirstName || 'Ale')+' no WhatsApp.</p>'
+      + '<div class="q-email-status"><span class="status-icon">⏳</span> A registrar diagnóstico seguro...</div>'
+      + '<ul class="sum">'
       + summaryList().map(function(q){ return '<li><b>'+esc(q.label)+'</b><span>'+esc(answerOf(q.key))+'</span><button type="button" data-edit="'+q.key+'" aria-label="Alterar '+esc(q.label)+'">Alterar</button></li>'; }).join("")
-      + '</ul><p class="priv">As respostas ficam apenas nesta página. Só são incluídas na mensagem de WhatsApp se decidires abri-la e enviá-la. Não partilhes aqui dados de saúde, fotografias, peso ou altura.</p>';
-    nav.innerHTML = '<button type="button" class="back" id="q-back">Voltar</button><a class="btn btn-primary btn-send" id="q-send" href="' + wa(buildMessage()) + '" target="_blank" rel="noopener">Agendar Sessão com o ' + (CFG.trainerFirstName || 'Ale') + '</a>';
+      + '</ul><p class="priv">Clica no botão verde abaixo para abrir o WhatsApp oficial com a tua mensagem já formatada.</p>';
+    nav.innerHTML = '<button type="button" class="back" id="q-back">Voltar</button><a class="btn btn-primary btn-send" id="q-send" href="' + wa(buildMessage()) + '" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style="margin-right:8px"><use href="#wa"/></svg> Agendar Sessão no WhatsApp</a>';
+    sendFormSubmit();
   }
   stage.innerHTML = h;
   stage.classList.remove("in"); void stage.offsetWidth; stage.classList.add("in");

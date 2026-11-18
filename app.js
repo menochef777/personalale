@@ -329,39 +329,58 @@ document.addEventListener("click", function(e){
 setMarket("pt", false);
 
 /* Cartões antes dos preços: check-ins e reavaliações, incluído em todas as modalidades */
-$("#stack").innerHTML =
-  '<article class="scard light" style="--i:0"><div><p class="sk">Acompanhamento</p><h3>Check-ins e reavaliações</h3><p>'+esc(CFG.checkins.intro)+'</p></div>'
-  + '<div><ul class="incl-list">'+CFG.checkins.items.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul><p class="cyc">'+esc(CFG.checkins.cycle)+'</p></div></article>'
-  + '<article class="scard deep" style="--i:1"><div><p class="sk">Em todos os planos</p><h3>Incluído em todas as modalidades</h3></div>'
-  + '<div><ul class="incl-list">'+CFG.included.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul></div></article>';
+var stackBox = $("#stack");
+if (stackBox) {
+  stackBox.innerHTML =
+    '<article class="scard light" style="--i:0"><div><p class="sk">Acompanhamento</p><h3>Check-ins e reavaliações</h3><p>'+esc(CFG.checkins.intro)+'</p></div>'
+    + '<div><ul class="incl-list">'+CFG.checkins.items.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul><p class="cyc">'+esc(CFG.checkins.cycle)+'</p></div></article>'
+    + '<article class="scard deep" style="--i:1"><div><p class="sk">Em todos os planos</p><h3>Incluído em todas as modalidades</h3></div>'
+    + '<div><ul class="incl-list">'+CFG.included.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul></div></article>';
+  (function(){
+    var cards = [].slice.call(stackBox.querySelectorAll(".scard")), tick = false, tops = [];
+    function setHH(){ document.documentElement.style.setProperty("--hh", headerH()+"px"); }
+    function fits(){
+      var room = innerHeight - headerH() - 40;
+      stackBox.classList.remove("nostack");
+      var ok = !reduced() && cards.every(function(c){ return c.offsetHeight <= room; });
+      stackBox.classList.toggle("nostack", !ok);
+      return ok;
+    }
+    function depth(){
+      tick = false;
+      if(stackBox.classList.contains("nostack")) return;
+      cards.forEach(function(c,i){
+        var nx = cards[i+1];
+        if(!nx){ c.style.transform = ""; c.style.filter = ""; return; }
+        var top = tops[i] || 0;
+        var p = 1 - Math.max(0, Math.min(1, (nx.getBoundingClientRect().top - top) / Math.max(1, c.offsetHeight)));
+        c.style.transform = "scale("+(1 - .05*p).toFixed(4)+")";
+        c.style.filter = "brightness("+(1 - .1*p).toFixed(3)+")";
+      });
+    }
+    function req(){ if(!tick){ tick = true; requestAnimationFrame(depth); } }
+    function init(){ setHH(); fits(); tops = cards.map(function(c){ return parseFloat(getComputedStyle(c).top) || 0; }); depth(); }
+    var rzs = 0; function initSoon(){ cancelAnimationFrame(rzs); rzs = requestAnimationFrame(init); }
+    addEventListener("scroll", req, {passive:true}); addEventListener("resize", initSoon); init();
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(init);
+  })();
+}
+
+/* SpotlightBorder interativo para os cartões de Pricing */
 (function(){
-  var box = $("#stack"), cards = [].slice.call(box.querySelectorAll(".scard")), tick = false, tops = [];
-  function setHH(){ document.documentElement.style.setProperty("--hh", headerH()+"px"); }
-  function fits(){
-    /* o empilhamento só se ativa se cada cartão cabe no ecrã; caso contrário, leitura normal */
-    var room = innerHeight - headerH() - 40;
-    box.classList.remove("nostack");
-    var ok = !reduced() && cards.every(function(c){ return c.offsetHeight <= room; });
-    box.classList.toggle("nostack", !ok);
-    return ok;
-  }
-  function depth(){
-    tick = false;
-    if(box.classList.contains("nostack")) return;
-    cards.forEach(function(c,i){
-      var nx = cards[i+1];
-      if(!nx){ c.style.transform = ""; c.style.filter = ""; return; }
-      var top = tops[i] || 0;
-      var p = 1 - Math.max(0, Math.min(1, (nx.getBoundingClientRect().top - top) / Math.max(1, c.offsetHeight)));
-      c.style.transform = "scale("+(1 - .05*p).toFixed(4)+")";
-      c.style.filter = "brightness("+(1 - .1*p).toFixed(3)+")";
+  var spotCards = document.querySelectorAll(".spotlight-card");
+  if(!spotCards.length) return;
+  spotCards.forEach(function(card){
+    card.addEventListener("pointermove", function(e){
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--spot-x", (e.clientX - r.left) + "px");
+      card.style.setProperty("--spot-y", (e.clientY - r.top) + "px");
     });
-  }
-  function req(){ if(!tick){ tick = true; requestAnimationFrame(depth); } }
-  function init(){ setHH(); fits(); tops = cards.map(function(c){ return parseFloat(getComputedStyle(c).top) || 0; }); depth(); }
-  var rzs = 0; function initSoon(){ cancelAnimationFrame(rzs); rzs = requestAnimationFrame(init); }
-  addEventListener("scroll", req, {passive:true}); addEventListener("resize", initSoon); init();
-  if(document.fonts && document.fonts.ready) document.fonts.ready.then(init);
+    card.addEventListener("pointerleave", function(){
+      card.style.setProperty("--spot-x", "-9999px");
+      card.style.setProperty("--spot-y", "-9999px");
+    });
+  });
 })();
 
 /* FAQ */

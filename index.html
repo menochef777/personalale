@@ -22,7 +22,8 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,700;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   
   <meta name="theme-color" content="#111111">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121319' stroke='%23D4AF37' stroke-width='2'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23D4AF37' font-family='Montserrat%2C sans-serif' font-weight='800' font-size='13'%3EAB%3C/text%3E%3C/svg%3E">
@@ -52,7 +53,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=20261118_mono">
+  <link rel="stylesheet" href="style.css?v=20261118_v4">
 </head>
 <body>
 
@@ -212,17 +213,155 @@
       </div>
     </section>
 
-    <!-- PLANOS & VALORES -->
-    <section class="plans" id="planos" aria-labelledby="h-planos">
-      <div class="wrap">
-        <div class="head" data-reveal>
-          <p class="kicker">Programas &amp; Acompanhamento</p>
-          <h2 id="h-planos">Programas &amp; <em class="hl">valores.</em></h2>
+    <!-- PLANOS & VALORES (NOVO PRICING LUXURY ESCURO) -->
+    <section class="pricing-sec" id="planos" aria-labelledby="h-pricing">
+      <div class="pricing-wrap">
+        <!-- HEADER -->
+        <div class="pricing-header">
+          <div class="pricing-header-left">
+            <div data-reveal>
+              <span class="pricing-pill">
+                <span class="dot"></span>
+                Pricing
+              </span>
+            </div>
+            <div data-reveal style="--d:0.1s">
+              <h2 id="h-pricing" class="pricing-title">
+                Clear pricing plans<br class="br-hide"> that scale with you.
+              </h2>
+            </div>
+          </div>
+          <div data-reveal style="--d:0.2s">
+            <p class="pricing-desc">
+              One-time payment. Lifetime access. Pick the plan that fits how far you want to go.
+            </p>
+          </div>
         </div>
-        <div class="stack" id="stack" aria-label="O que está incluído"></div>
-        <p class="lead muted pick" data-reveal>Ciclos de acompanhamento e investimento em euros (€) para sessões presenciais em Portugal e consultoria executiva online.</p>
-        <p class="mkt-note" id="mkt-note" aria-live="polite"></p>
-        <div class="plan-grid" id="plan-grid" role="region" aria-label="Programas e Valores"></div>
+
+        <!-- CARDS GRID -->
+        <div class="pricing-grid">
+          
+          <!-- CARD 1: Course -->
+          <div class="spotlight-card" data-reveal style="--d:0.05s">
+            <div class="inner-card card-dark-1">
+              <div class="pricing-eyebrow">
+                Course
+              </div>
+              <div class="pricing-divider"></div>
+
+              <div class="pricing-price-row">
+                <span class="price-val">$159</span>
+                <span class="price-orig">$497</span>
+              </div>
+
+              <p class="pricing-card-desc">
+                Once. Lifetime. 68% off.
+              </p>
+
+              <div class="pricing-btn-wrap">
+                <a href="#questionario" data-plan="mensal" class="btn-spotlight btn-secondary-spot">
+                  <span>Get Started</span>
+                </a>
+              </div>
+
+              <ul class="pricing-features">
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>All courses and videos</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>All modules. Lifetime access.</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>AI Builder</span>
+                </li>
+                <li class="pricing-feature-item excluded">
+                  <span class="icon-circle">
+                    <span class="material-symbols-outlined">close</span>
+                  </span>
+                  <span>Unlimited Templates</span>
+                </li>
+                <li class="pricing-feature-item excluded">
+                  <span class="icon-circle">
+                    <span class="material-symbols-outlined">close</span>
+                  </span>
+                  <span>Unlimited Motion Videos</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CARD 2: Course + Lovable Templates (Featured) -->
+          <div class="spotlight-card" data-reveal style="--d:0.15s">
+            <div class="inner-card card-dark-2">
+              <div class="badge-featured">
+                Best Value
+              </div>
+
+              <div class="pricing-eyebrow">
+                Course + Lovable Templates
+              </div>
+              <div class="pricing-divider"></div>
+
+              <div class="pricing-price-row">
+                <span class="price-val">$239</span>
+                <span class="price-orig">$697</span>
+              </div>
+
+              <p class="pricing-card-desc">
+                Once. Lifetime. Best deal.
+              </p>
+
+              <div class="pricing-btn-wrap">
+                <a href="#questionario" data-plan="trimestral" class="btn-spotlight btn-primary-spot">
+                  <span>Get Started</span>
+                </a>
+              </div>
+
+              <ul class="pricing-features">
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>All courses and videos</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>All modules. Lifetime access.</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>AI Builder</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Unlimited Templates</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Unlimited Motion Videos</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 

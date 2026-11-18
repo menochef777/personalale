@@ -53,7 +53,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=20261118_v13">
+  <link rel="stylesheet" href="style.css?v=20261118_v14">
 </head>
 <body>
 
@@ -438,15 +438,94 @@
       </div>
     </section>
 
-    <!-- MODALIDADES -->
-    <section class="modes" id="modalidades" aria-labelledby="h-mod">
+    <!-- SEÇÃO INSTAGRAM / BASTIDORES & ÚLTIMAS NOTÍCIAS (ESTILO NOVA DERMA) -->
+    <section class="insta-section dark" id="instagram" aria-labelledby="h-insta">
       <div class="wrap">
-        <div class="head" data-reveal>
-          <p class="kicker">Formatos de Atendimento</p>
-          <h2 id="h-mod">Presencial em Portugal. <em>Online onde os teus negócios estiverem.</em></h2>
-          <p class="lead muted">Sessões individuais reservadas em Portugal ou consultoria executiva 100% online através da aplicação móvel.</p>
+        <!-- Título e Subtítulo Centralizados Fique Conectado -->
+        <div class="insta-header" data-reveal>
+          <p class="kicker">Em Tempo Real</p>
+          <h2 id="h-insta" class="insta-title">Fique Conectado</h2>
+          <p class="lead muted insta-lead">
+            Acompanha de perto a rotina de treinos executivos, bastidores de alta performance e os conteúdos diários em tempo real no Instagram oficial do Ale Braga.
+          </p>
         </div>
-        <div class="mode-grid" id="modes"></div>
+
+        <!-- Indicador de swipe no mobile -->
+        <div class="insta-swipe-indicator" aria-hidden="true">
+          <span>👈</span> Desliza para explorar as publicações <span>👉</span>
+        </div>
+
+        <!-- 4 Cards Verticais / Estilo Reels e Posts -->
+        <div class="insta-grid">
+          <!-- Card 1 -->
+          <a href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener" class="insta-card" data-reveal style="--d:0.05s" aria-label="Abrir publicação de Ale Braga no Instagram">
+            <img src="assets/ale_braga_oficial.webp" alt="Ale Braga - Treino Presencial & Alta Densidade" loading="lazy" class="insta-img">
+            <div class="insta-overlay">
+              <div class="insta-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><use href="#ig"/></svg>
+              </div>
+              <div class="insta-info">
+                <span class="insta-tag">Portugal · Presencial</span>
+                <p class="insta-name">Ale Braga • Treino Presencial &amp; Alta Densidade em 45min</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener" class="insta-card" data-reveal style="--d:0.12s" aria-label="Abrir publicação de Ale Braga no Instagram">
+            <img src="assets/ale_real.webp" alt="Ale Braga - Rotina & Performance para Empresários" loading="lazy" class="insta-img">
+            <div class="insta-overlay">
+              <div class="insta-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><use href="#ig"/></svg>
+              </div>
+              <div class="insta-info">
+                <span class="insta-tag">Metodologia 45 Min</span>
+                <p class="insta-name">Ale Braga • Performance para Empresários com Agenda Cheia</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener" class="insta-card" data-reveal style="--d:0.19s" aria-label="Abrir publicação de Ale Braga no Instagram">
+            <img src="assets/ale_braga_full.webp" alt="Ale Braga - Correção Postural & Mobilidade" loading="lazy" class="insta-img">
+            <div class="insta-overlay">
+              <div class="insta-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><use href="#ig"/></svg>
+              </div>
+              <div class="insta-info">
+                <span class="insta-tag">Técnica &amp; Foco</span>
+                <p class="insta-name">Ale Braga • Correção Postural &amp; Máximo Retorno Temporal</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener" class="insta-card" data-reveal style="--d:0.26s" aria-label="Abrir publicação de Ale Braga no Instagram">
+            <img src="assets/ale_about.webp" alt="Ale Braga - Fitness Advisory Online Global" loading="lazy" class="insta-img">
+            <div class="insta-overlay">
+              <div class="insta-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><use href="#ig"/></svg>
+              </div>
+              <div class="insta-info">
+                <span class="insta-tag">Online Global</span>
+                <p class="insta-name">Ale Braga • Fitness Advisory Onde os Teus Negócios Estiverem</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Seguidores e Botão CTA -->
+        <div class="insta-footer" data-reveal style="--d:0.32s">
+          <p class="insta-counter">
+            <span class="insta-count-num">+ de 10 Mil Seguidores</span>
+            <span class="insta-sep">•</span>
+            <a href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener" class="insta-handle">@eualebraga</a>
+          </p>
+          <a href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener" class="btn btn-insta">
+            <svg class="insta-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ig"/></svg>
+            Seguir no Instagram
+          </a>
+        </div>
       </div>
     </section>
 
@@ -573,6 +652,6 @@
     </p>
   </noscript>
 
-  <script src="app.js?v=20261118_v13"></script>
+  <script src="app.js?v=20261118_v14"></script>
 </body>
 </html>

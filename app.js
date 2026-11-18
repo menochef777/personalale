@@ -23,7 +23,7 @@ var CFG = {
     online: "Olá, Ale! Tenho interesse no Fitness & Performance Advisory Online para a minha rotina. Podes apresentar-me a metodologia?"
   },
   nav: [
-    ["Sobre","#sobre"],["Áreas","#areas"],["Método 45min","#como-funciona"],["Diagnóstico","#questionario"],["Programas","#planos"],["Instagram","#instagram"],["FAQ","#faq"]
+    ["Sobre","#sobre"],["Áreas","#areas"],["Método 45min","#como-funciona"],["Diagnóstico","#questionario"],["Programas","#planos"],["Modalidades","#modalidades"],["FAQ","#faq"]
   ],
   /* título, descrição, ícone, destaque */
   focus: [
@@ -268,20 +268,17 @@ $("#steps").innerHTML = CFG.steps.map(function(s,i){
 }).join("");
 
 /* Modalidades */
-var modesEl = $("#modes");
-if(modesEl && CFG.modes){
-  modesEl.innerHTML = CFG.modes.map(function(m,i){
-    var mk = m.id==="presencial"
-      ? '<svg class="mk" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="38" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="42" cy="42" r="8" fill="currentColor"/></svg>'
-      : '<svg class="mk" viewBox="0 0 84 84" aria-hidden="true"><path d="M4 42h18l10-26 16 52 10-26h22" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/></svg>';
-    var flags = m.flags.map(function(f){return '<svg class="flag" aria-hidden="true"><use href="#flag-'+f+'"/></svg>';}).join("");
-    return '<article class="mode dark '+m.cls+'" data-reveal style="--d:'+(i*0.1)+'s">'
-      + '<span class="badge">'+flags+esc(m.where)+'</span>'
-      + mk + '<h3>'+esc(m.title)+'</h3><p>'+esc(m.text)+'</p>'
-      + '<div class="macts"><button type="button" class="btn btn-light" data-mode="'+m.id+'">'+esc(m.cta)+' '+ARR+'</button>'
-      + '<button type="button" class="alt" data-go-market="'+m.market+'">'+esc(m.link)+'</button></div></article>';
-  }).join("");
-}
+$("#modes").innerHTML = CFG.modes.map(function(m,i){
+  var mk = m.id==="presencial"
+    ? '<svg class="mk" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="38" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="42" cy="42" r="8" fill="currentColor"/></svg>'
+    : '<svg class="mk" viewBox="0 0 84 84" aria-hidden="true"><path d="M4 42h18l10-26 16 52 10-26h22" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/></svg>';
+  var flags = m.flags.map(function(f){return '<svg class="flag" aria-hidden="true"><use href="#flag-'+f+'"/></svg>';}).join("");
+  return '<article class="mode dark '+m.cls+'" data-reveal style="--d:'+(i*0.1)+'s">'
+    + '<span class="badge">'+flags+esc(m.where)+'</span>'
+    + mk + '<h3>'+esc(m.title)+'</h3><p>'+esc(m.text)+'</p>'
+    + '<div class="macts"><button type="button" class="btn btn-light" data-mode="'+m.id+'">'+esc(m.cta)+' '+ARR+'</button>'
+    + '<button type="button" class="alt" data-go-market="'+m.market+'">'+esc(m.link)+'</button></div></article>';
+}).join("");
 
 /* ===== Planos e valores ===== */
 var MARKET = "pt";

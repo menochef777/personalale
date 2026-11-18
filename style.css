@@ -1228,8 +1228,53 @@ p { margin: 0; }
   transition: width .35s ease;
 }
 
-/* Conteúdo da Pergunta */
-.stage { min-height: 220px; }
+/* Conteúdo da Pergunta — Altura Estável e Travada */
+.stage {
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.q-contact-box {
+  display: grid;
+  gap: 16px;
+  margin-top: 14px;
+}
+.q-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.q-label {
+  font-family: var(--f-display);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+.q-input {
+  width: 100%;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  padding: 0 16px;
+  font-family: var(--f-body);
+  font-size: 0.98rem;
+  border-radius: 12px;
+  outline: none;
+  transition: all .2s;
+  box-sizing: border-box;
+}
+.q-input:focus {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);
+}
+.q-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
 .qk {
   font-family: var(--f-display);
   font-size: 0.72rem;
@@ -1428,6 +1473,25 @@ p { margin: 0; }
   flex: none;
 }
 @media(max-width: 600px) {
+  .qcard {
+    padding: 22px 16px;
+    border-radius: 18px;
+  }
+  .stage {
+    min-height: 350px;
+  }
+  .opts {
+    gap: 8px;
+  }
+  .opt {
+    padding: 12px 14px;
+    min-height: 48px;
+    font-size: 0.91rem;
+  }
+  .q-input {
+    height: 48px;
+    font-size: 0.95rem;
+  }
   .btn-send {
     width: auto !important;
     padding: 12px 22px !important;

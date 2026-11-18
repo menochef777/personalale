@@ -12,8 +12,8 @@ var CFG = {
   trainerFirstName: "Ale",
   jobTitle: "Coach, Personal Trainer & Fitness Advisory",
   location: "Portugal & Online",
-  phone: "351910000000",
-  phoneDisplay: "+351 910 000 000",
+  phone: "351962619403",
+  phoneDisplay: "+351 962 619 403",
   instagram: "https://www.instagram.com/eualebraga/",
   linkbio: "https://instabio.cc/8081719rPVC4X",
   msgs: {
@@ -106,6 +106,7 @@ var ICONS = {
 
 
 var QUIZ = [
+  {key:"contact", q:"Qual é o teu nome e contacto de WhatsApp?", hint:"Para o Ale Braga personalizar a tua sessão estratégica e validar a tua agenda.", type:"contact", label:"Identificação"},
   {key:"goal", q:"Qual é o teu principal objetivo de performance?", hint:"Escolhe a opção que melhor descreve as tuas prioridades atuais.", type:"single", label:"Objetivo",
    opts:["Aumentar energia e disposição para o trabalho","Reduzir gordura corporal e tonificar","Ganhar força, massa muscular e presença física","Criar consistência de treino numa agenda cheia","Corrigir postura e aliviar dores/stress","Outro objetivo"]},
   {key:"country", q:"Em que país estás sediado?", hint:"Presencial em Portugal ou acompanhamento executivo online à distância.", type:"single", label:"País",
@@ -149,7 +150,7 @@ window.addEventListener('pageshow', function(e) {
   }
 });
 
-function wa(msg){ return "https://wa.me/" + CFG.phone + "?text=" + encodeURIComponent(msg); }
+function wa(msg){ return "https://api.whatsapp.com/send/?phone=" + CFG.phone + "&text=" + encodeURIComponent(msg); }
 function $(s,r){ return (r||document).querySelector(s); }
 function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
 var ARR = '<svg class="arr" aria-hidden="true"><use href="#arrow"/></svg>';
@@ -435,7 +436,7 @@ if (stackBox) {
 })();
 
 /* ===== Questionário ===== */
-var S = { step:0, editing:false, lock:false, preset:{}, a:{goal:null,country:null,format:null,level:null,days:[],periods:[],flex:false,support:null,plan:null} };
+var S = { step:0, editing:false, lock:false, preset:{}, a:{name:"",phone:"",goal:null,country:null,format:null,level:null,days:[],periods:[],flex:false,support:null,plan:null} };
 var stage = $("#stage"), errEl = $("#q-err"), nav = $("#q-nav"), qcard = $(".qcard");
 
 function applies(q){ return !q.when || q.when(); }
@@ -450,11 +451,13 @@ function availText(){
   return parts.join(" · ");
 }
 function answerOf(k){
+  if(k==="contact") return (S.a.name || "") + (S.a.phone ? " (" + S.a.phone + ")" : "");
   if(k==="avail") return availText();
   if(k==="format") return S.a.country==="Brasil" ? "Online" : S.a.format;
   return S.a[k];
 }
 function valid(q){
+  if(q.key==="contact") return !!(S.a.name && S.a.name.trim().length >= 2 && S.a.phone && S.a.phone.trim().length >= 6);
   if(q.key==="avail") return S.a.flex || S.a.days.length>0 || S.a.periods.length>0;
   return !!answerOf(q.key);
 }
@@ -472,14 +475,21 @@ function sendFormSubmit() {
   if (S.sentToEmail) return;
   S.sentToEmail = true;
 
+  var clientName = (S.a.name || "").trim() || "Cliente";
+  var clientPhone = (S.a.phone || "").trim() || "Não informado";
+
   var payload = {
-    _subject: "Novo Diagnóstico / Lead - Ale Braga Personal (" + (S.a.plan || "Sem plano pré-definido") + ")",
+    _subject: "Novo Lead - " + clientName + " (" + clientPhone + ") - " + (S.a.plan || "Sem plano pré-definido"),
     _template: "table",
-    _captcha: "false"
+    _captcha: "false",
+    "Nome Completo": clientName,
+    "Telefone / WhatsApp": clientPhone
   };
 
   summaryList().forEach(function(q) {
-    payload[q.label] = answerOf(q.key) || "Não informado";
+    if(q.key !== "contact") {
+      payload[q.label] = answerOf(q.key) || "Não informado";
+    }
   });
   if (S.a.plan) payload["Plano Selecionado"] = S.a.plan;
   payload["Data e Hora"] = new Date().toLocaleString("pt-PT");
@@ -505,9 +515,18 @@ function sendFormSubmit() {
 }
 
 function buildMessage(){
-  var lines = ["Olá, " + (CFG.trainerFirstName || "Ale") + "! Concluí o questionário no teu website sobre Performance para Empresários e gostaria de agendar a minha Sessão Estratégica. Seguem as minhas informações:",""];
-  summaryList().forEach(function(q){ lines.push("• "+q.label+": "+answerOf(q.key)); });
-  lines.push("","Fico a aguardar a sua resposta para agendarmos a sessão.");
+  var lines = [
+    "Olá, " + (CFG.trainerFirstName || "Ale") + "! Concluí o diagnóstico no teu website sobre Performance para Empresários e gostaria de agendar a minha Sessão Estratégica. Seguem os meus dados:",
+    "",
+    "• Nome: " + (S.a.name || "Não informado"),
+    "• Telefone: " + (S.a.phone || "Não informado")
+  ];
+  summaryList().forEach(function(q){
+    if(q.key !== "contact"){
+      lines.push("• " + q.label + ": " + (answerOf(q.key) || "Não informado"));
+    }
+  });
+  lines.push("", "Fico a aguardar a tua resposta para agendarmos a sessão.");
   return lines.join("\n");
 }
 function render(focus){
@@ -527,6 +546,14 @@ function render(focus){
       }).join("") + '</div>';
       /* perguntas de escolha avançam sozinhas: só o botão Voltar */
       nav.innerHTML = '<button type="button" class="back" id="q-back"'+(S.step===0?" hidden":"")+'>Voltar</button>';
+    } else if(q.type==="contact"){
+      h += '<div class="q-contact-box">'
+        + '<div class="q-field"><label for="q-name" class="q-label">O teu nome completo:</label>'
+        + '<input type="text" id="q-name" class="q-input" placeholder="Ex: Diogo Silva" value="'+esc(S.a.name||"")+'" autocomplete="name"></div>'
+        + '<div class="q-field"><label for="q-phone" class="q-label">Contacto telefónico / WhatsApp:</label>'
+        + '<input type="tel" id="q-phone" class="q-input" placeholder="Ex: +351 962 619 403" value="'+esc(S.a.phone||"")+'" autocomplete="tel"></div>'
+        + '</div>';
+      nav.innerHTML = '<button type="button" class="back" id="q-back"'+(S.step===0?" hidden":"")+'>Voltar</button><button type="button" class="btn btn-primary" id="q-next">Continuar '+ARR+'</button>';
     } else {
       h += '<div><p class="grp">Dias da semana</p><div class="chips" role="group" aria-label="Dias da semana">' + DAYS.map(function(d){
         return '<button type="button" class="chip" data-d="'+d+'" aria-pressed="'+(S.a.days.indexOf(d)>-1)+'">'+d+'</button>';}).join("") + '</div></div>'
@@ -538,10 +565,12 @@ function render(focus){
     }
   } else {
     h += '<p class="qk">Resumo Executivo</p><h3 id="q-title" tabindex="-1">O teu plano de performance está pronto.</h3>'
-      + '<p class="hint">Reunimos o panorama da tua rotina. O diagnóstico foi registrado e agora podes confirmar a tua sessão diretamente com o '+(CFG.trainerFirstName || 'Ale')+' no WhatsApp.</p>'
+      + '<p class="hint">Reunimos o panorama da tua rotina, ' + esc(S.a.name ? S.a.name.split(" ")[0] : "") + '. O diagnóstico foi registrado e agora podes confirmar a tua sessão diretamente com o '+(CFG.trainerFirstName || 'Ale')+' no WhatsApp.</p>'
       + '<div class="q-email-status"><span class="status-icon">⏳</span> A registrar diagnóstico seguro...</div>'
       + '<ul class="sum">'
-      + summaryList().map(function(q){ return '<li><b>'+esc(q.label)+'</b><span>'+esc(answerOf(q.key))+'</span><button type="button" data-edit="'+q.key+'" aria-label="Alterar '+esc(q.label)+'">Alterar</button></li>'; }).join("")
+      + '<li><b>Nome</b><span>' + esc(S.a.name || "Não informado") + '</span><button type="button" data-edit="contact" aria-label="Alterar Nome">Alterar</button></li>'
+      + '<li><b>Telefone / WhatsApp</b><span>' + esc(S.a.phone || "Não informado") + '</span><button type="button" data-edit="contact" aria-label="Alterar Contacto">Alterar</button></li>'
+      + summaryList().filter(function(q){ return q.key !== "contact"; }).map(function(q){ return '<li><b>'+esc(q.label)+'</b><span>'+esc(answerOf(q.key))+'</span><button type="button" data-edit="'+q.key+'" aria-label="Alterar '+esc(q.label)+'">Alterar</button></li>'; }).join("")
       + '</ul><p class="priv">Clica abaixo para abrir o WhatsApp oficial com o teu diagnóstico estruturado.</p>';
     nav.innerHTML = '<button type="button" class="back" id="q-back">Voltar</button><a class="btn btn-primary btn-send" id="q-send" href="' + wa(buildMessage()) + '" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg> Agendar Sessão Estratégica</a>';
     sendFormSubmit();
@@ -553,7 +582,9 @@ function render(focus){
 function go(n, focus){ S.step = n; render(focus); }
 function showCard(){
   var r = qcard.getBoundingClientRect();
-  if(r.top < headerH() || r.top > innerHeight*0.5) goToEl(qcard, false);
+  if(r.top < 65) {
+    window.scrollBy({ top: r.top - 80, behavior: reduced() ? "auto" : "smooth" });
+  }
 }
 /* depois de responder: segue para a pergunta seguinte, ou (em edição) para a primeira em falta / resumo */
 function advance(){
@@ -561,11 +592,10 @@ function advance(){
   if(S.editing){
     var miss = -1;
     for(var i=0;i<list.length;i++){ if(!valid(list[i])){ miss = i; break; } }
-    if(miss > -1){ go(miss, true); return; }
-    S.editing = false; go(list.length, true); showCard(); return;
+    if(miss > -1){ go(miss, false); return; }
+    S.editing = false; go(list.length, false); return;
   }
-  go(S.step+1, true);
-  if(S.step >= seq().length) showCard();
+  go(S.step+1, false);
 }
 
 stage.addEventListener("click", function(e){
@@ -603,8 +633,14 @@ stage.addEventListener("click", function(e){
     S.editing = true; go(Math.max(0, idx), true);
   }
 });
-/* setas movem o foco; Enter/Espaço escolhem (e avançam) */
+/* setas movem o foco; Enter avança */
 stage.addEventListener("keydown", function(e){
+  if(e.key === "Enter" && (e.target.id === "q-name" || e.target.id === "q-phone")){
+    e.preventDefault();
+    var nb = $("#q-next");
+    if(nb) nb.click();
+    return;
+  }
   var o = e.target.closest(".opt"); if(!o) return;
   var d = (e.key==="ArrowDown"||e.key==="ArrowRight") ? 1 : (e.key==="ArrowUp"||e.key==="ArrowLeft") ? -1 : 0;
   if(!d) return; e.preventDefault();
@@ -615,12 +651,32 @@ stage.addEventListener("keydown", function(e){
 nav.addEventListener("click", function(e){
   if(e.target.closest("#q-back")){
     var total = seq().length;
-    if(S.step>=total){ S.editing = false; go(Math.max(0,total-1), true); }
-    else go(Math.max(0,S.step-1), true);
+    if(S.step>=total){ S.editing = false; go(Math.max(0,total-1), false); }
+    else go(Math.max(0,S.step-1), false);
     return;
   }
   if(e.target.closest("#q-next")){
     var q = seq()[S.step];
+    if(q && q.type === "contact"){
+      var nameEl = $("#q-name"), phoneEl = $("#q-phone");
+      var nm = nameEl ? nameEl.value.trim() : "";
+      var ph = phoneEl ? phoneEl.value.trim() : "";
+      if(!nm || nm.length < 2){
+        errEl.textContent = "Por favor indica o teu nome completo.";
+        if(nameEl) nameEl.focus();
+        return;
+      }
+      if(!ph || ph.length < 6){
+        errEl.textContent = "Por favor indica o teu contacto telefónico / WhatsApp.";
+        if(phoneEl) phoneEl.focus();
+        return;
+      }
+      S.a.name = nm;
+      S.a.phone = ph;
+      errEl.textContent = "";
+      advance();
+      return;
+    }
     if(!q || !valid(q)){
       errEl.textContent = "Seleciona pelo menos um dia ou período, ou a opção sem preferência.";
       return;

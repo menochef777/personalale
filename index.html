@@ -1,86 +1,578 @@
-<!DOCTYPE html>
-<html lang="pt">
+<!doctype html>
+<html lang="pt-PT">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acesso Suspenso</title>
-  <meta name="robots" content="noindex, nofollow">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #09090B;
-      color: #A1A1AA;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      text-align: center;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>Ale Braga | Performance para Empresários | Treino Objetivo para Agendas Cheias</title>
+
+  <meta name="description" content="Treino objetivo para quem tem agenda cheia. Coach, Personal Trainer e Fitness & Performance Advisory para empresários, executivos e profissionais exigentes em Portugal e Online.">
+  <link rel="canonical" href="./">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="./">
+  <meta property="og:title" content="Ale Braga | Performance para Empresários">
+  <meta property="og:description" content="Treino objetivo para quem tem agenda cheia. Estrutura, acompanhamento e estratégia para treinares com consistência sem perder tempo.">
+  <meta property="og:image" content="assets/ale_hero.webp">
+  <meta property="og:image:type" content="image/webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ale Braga | Performance para Empresários">
+  <meta name="twitter:description" content="Treino objetivo para quem tem agenda cheia. Estrutura, acompanhamento e estratégia para treinares com consistência sem perder tempo.">
+  <meta name="twitter:image" content="assets/ale_hero.webp">
+  <meta name="author" content="Ale Braga">
+  <meta property="og:locale" content="pt_PT">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,500;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121319' stroke='%23D4AF37' stroke-width='2'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23D4AF37' font-family='Montserrat%2C sans-serif' font-weight='800' font-size='13'%3EAB%3C/text%3E%3C/svg%3E">
+
+  <!-- Sempre recarregar do início da página -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
     }
-    .card {
-      max-width: 440px;
-      width: 100%;
-      background: #141418;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 48px 28px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    window.scrollTo(0, 0);
+  </script>
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ale Braga",
+    "jobTitle": "Coach, Personal Trainer & Fitness Advisory",
+    "telephone": "+351962619403",
+    "url": "https://www.instagram.com/eualebraga/",
+    "image": "assets/ale_hero.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "PT"
     }
-    .icon-wrap {
-      width: 54px;
-      height: 54px;
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px auto;
-      color: #EF4444;
-    }
-    .icon-wrap svg {
-      width: 26px;
-      height: 26px;
-    }
-    h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-    p {
-      font-size: 0.92rem;
-      line-height: 1.6;
-      color: #71717A;
-    }
-    .badge {
-      display: inline-block;
-      margin-top: 24px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #52525B;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-  </style>
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=20261118_v16">
 </head>
 <body>
-  <div class="card">
-    <div class="icon-wrap" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
-      </svg>
+
+  <!-- SVGs Defs -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="flag-pt" viewBox="0 0 30 20">
+        <rect width="30" height="20" fill="#DA291C"/>
+        <rect width="12" height="20" fill="#046A38"/>
+        <circle cx="12" cy="10" r="4.2" fill="#FFE000"/>
+        <circle cx="12" cy="10" r="2" fill="#fff"/>
+      </symbol>
+      <symbol id="flag-br" viewBox="0 0 30 20">
+        <rect width="30" height="20" fill="#009C3B"/>
+        <path d="M15 2.2 27.2 10 15 17.8 2.8 10z" fill="#FFDF00"/>
+        <circle cx="15" cy="10" r="4.4" fill="#002776"/>
+        <path d="M10.8 9.1Q15 7.9 19.2 11" fill="none" stroke="#fff" stroke-width=".9"/>
+      </symbol>
+      <symbol id="ig" viewBox="0 0 24 24">
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/>
+      </symbol>
+      <symbol id="arrow" viewBox="0 0 24 24">
+        <path d="M3 12h17M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="wa" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+  <!-- HEADER -->
+  <header class="hdr dark" id="topo">
+    <div class="wrap">
+      <a class="logo" href="#inicio" aria-label="Ale Braga, Performance para Empresários. Início">
+        <span class="logo-img" aria-hidden="true"></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Principal"></nav>
+      <div class="hdr-end">
+        <a class="btn btn-light btn-sm hdr-cta" data-wa="avaliacao" href="#questionario" target="_blank" rel="noopener">
+          Agendar Sessão Estratégica
+        </a>
+        <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav">
+          <span></span>
+        </button>
+      </div>
     </div>
-    <h1>Demonstração Indisponível</h1>
-    <p>O acesso a esta prévia de desenvolvimento foi temporariamente desativado pelo desenvolvedor responsável.</p>
-    <span class="badge">Status: Offline</span>
-  </div>
+    <nav class="mnav" id="mnav" aria-label="Menu móvel">
+      <div class="wrap" id="mnav-in"></div>
+    </nav>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main id="conteudo">
+    <!-- HERO -->
+    <section class="hero dark" id="inicio" aria-labelledby="h1">
+      <div class="wrap">
+        <div>
+          <h1 id="h1" class="rise" style="--d:.15s">
+            Treino objetivo para quem tem <em>agenda cheia.</em>
+          </h1>
+          <p class="lead rise" style="--d:.3s">
+            Estrutura, acompanhamento e estratégia para treinares com consistência sem perder tempo. Alta performance física integrada à tua rotina executiva.
+          </p>
+          <div class="ctas rise" style="--d:.42s">
+            <a class="btn btn-light" href="#questionario">
+              Agendar Sessão Estratégica
+            </a>
+            <a class="btn btn-ghost" href="#planos">
+              Ver Programas &amp; Valores
+            </a>
+          </div>
+        </div>
+        <figure class="photo rise" style="--d:.25s;margin:0">
+          <div class="frame">
+            <img src="assets/ale_hero.webp" alt="Ale Braga - Performance para Empresários" width="960" height="1280" fetchpriority="high" decoding="async">
+          </div>
+          <figcaption>
+            <span>Ale Braga</span>
+            <span>Portugal &amp; Global</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- STRIP TICKER -->
+    <div class="strip dark" aria-hidden="true">
+      <div class="strip-track" id="strip"></div>
+    </div>
+
+    <!-- SOBRE -->
+    <section class="about" id="sobre" aria-labelledby="h-sobre">
+      <div class="wrap">
+        <figure class="about-photo" data-reveal style="margin:0">
+          <picture>
+            <source srcset="assets/ale_braga_oficial.webp?v=20261118_v2" type="image/webp">
+            <img class="img" src="assets/ale_braga_oficial.jpg?v=20261118_v2" alt="Ale Braga - Performance para Empresários" width="770" height="960" loading="eager" decoding="async">
+          </picture>
+          <figcaption class="tag">Ale Braga <span>PERFORMANCE PARA EMPRESÁRIOS</span></figcaption>
+        </figure>
+        <div data-reveal style="--d:.1s">
+          <p class="kicker">Quem é o Ale Braga</p>
+          <h2 id="h-sobre">Por trás de grandes decisões, <em class="hl">um corpo preparado para a exigência.</em></h2>
+          <div class="body">
+            <p>Sou o Ale Braga, Coach, Personal Trainer e Empresário. A minha atuação combina treino de alta densidade, disciplina física e aconselhamento estratégico de rotina (Fitness &amp; Performance Advisory) para profissionais com alta demanda de tempo e responsabilidade empresarial.</p>
+            <p>A proposta central é direta: treino objetivo para quem tem agenda cheia. Não precisas de passar longas horas no ginásio para teres um físico forte, definido e com energia inesgotável. Através de sessões compactas de 45 minutos e periodização cirúrgica, transformamos o teu tempo no teu maior ativo de saúde e foco.</p>
+            <p>Com atendimento presencial executivo em Portugal e acompanhamento online através de aplicação móvel disponível globalmente, o método é calibrado para responder a viagens frequentes, reuniões imprevistas e metas profissionais ambiciosas.</p>
+          </div>
+          <div class="formation">
+            <b>Posicionamento:</b> Performance para Empresários &amp; Advisory · <b>Método 45 Min</b> · <b>100%</b> Individualizado · <b>Portugal &amp; Global</b>.
+          </div>
+          <p class="fchips-t">Pilares de atuação</p>
+          <div class="fchips" id="fchips"></div>
+          <p class="pull"><span class="hl">Treino objetivo para quem tem agenda cheia. Sem desculpas, com método.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREAS DE FOCO -->
+    <section class="areas" id="areas" aria-labelledby="h-areas">
+      <div class="wrap">
+        <div class="head" data-reveal>
+          <p class="kicker">Direcionamento Executivo</p>
+          <h2 id="h-areas">O que podemos <em>construir</em> juntos.</h2>
+          <p class="lead muted">Foco em resultados mensuráveis, economia de tempo e energia máxima para liderar os teus negócios.</p>
+        </div>
+        <div class="focus-grid" id="focus-grid"></div>
+        <p class="note">O acompanhamento respeita a tua individualidade anatómica e carga horária real. Os resultados resultam de metodologia precisa e adesão consistente.</p>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="process" id="como-funciona" aria-labelledby="h-proc">
+      <div class="wrap">
+        <div class="head" data-reveal>
+          <p class="kicker">Metodologia Validada</p>
+          <h2 id="h-proc">O Método de <em>Performance Executiva</em></h2>
+          <p class="lead muted">Um processo analítico e seguro, desenhado para gerar consistência duradoura mesmo nas semanas mais atribuladas.</p>
+        </div>
+        <ol class="steps" id="steps"></ol>
+        <p class="res" data-reveal>Resultado: treinos de 45 minutos com direção, energia sustentada e disciplina consolidada.</p>
+      </div>
+    </section>
+
+    <!-- QUESTIONÁRIO INTERATIVO -->
+    <section class="quiz dark" id="questionario" aria-labelledby="h-quiz">
+      <div class="wrap">
+        <div class="intro" data-reveal>
+          <span class="quiz-pill">
+            <span class="dot"></span>
+            Diagnóstico de Performance
+          </span>
+          <h2 id="h-quiz">O teu ponto de partida <em class="hl hl-b">executivo.</em></h2>
+          <p class="lead">Responde em menos de 1 minuto para avaliarmos a compatibilidade da tua agenda e desenharmos o protocolo ideal para a tua rotina.</p>
+          <p class="sel" id="sel-plan" hidden></p>
+        </div>
+        <div class="qcard" data-reveal style="--d:.1s">
+          <div class="qtop">
+            <span class="qstep-badge" id="q-count">Pergunta 1 de 6</span>
+            <span class="qpct-badge" id="q-pct">0%</span>
+          </div>
+          <div class="bar" id="q-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do questionário">
+            <i></i>
+          </div>
+          <div class="stage" id="stage" tabindex="-1"></div>
+          <div class="err" id="q-err" role="alert"></div>
+          <div class="qnav" id="q-nav"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS & VALORES (DESIGN LUXURY ESCURO - 3 PLANOS EM PORTUGUÊS) -->
+    <section class="pricing-sec" id="planos" aria-labelledby="h-pricing">
+      <div class="pricing-wrap">
+        <!-- HEADER -->
+        <div class="pricing-header">
+          <div class="pricing-header-left">
+            <div data-reveal>
+              <span class="pricing-pill">
+                <span class="dot"></span>
+                Programas &amp; Valores
+              </span>
+            </div>
+            <div data-reveal style="--d:0.1s">
+              <h2 id="h-pricing" class="pricing-title">
+                Planos de investimento claros<br class="br-hide"> que escalam consigo.
+              </h2>
+            </div>
+          </div>
+          <div data-reveal style="--d:0.2s">
+            <p class="pricing-desc">
+              Treino objetivo em 45 minutos com acompanhamento próximo. Escolha o ciclo ideal para a sua rotina e objetivos.
+            </p>
+          </div>
+        </div>
+
+        <!-- CARDS GRID (3 PLANOS) -->
+        <div class="pricing-grid">
+          
+          <!-- CARD 1: Plano Mensal -->
+          <div class="spotlight-card" data-reveal style="--d:0.05s">
+            <div class="inner-card card-dark-1">
+              <div class="pricing-eyebrow">
+                Plano Mensal
+              </div>
+              <div class="pricing-divider"></div>
+
+              <div class="pricing-price-row">
+                <span class="price-val">65€</span>
+                <span class="price-orig">95€</span>
+              </div>
+
+              <p class="pricing-card-desc">
+                1 mês de acompanhamento. Início imediato do método objetivo de 45 minutos.
+              </p>
+
+              <div class="pricing-btn-wrap">
+                <a href="#questionario" data-plan="mensal" class="btn-spotlight btn-secondary-spot">
+                  <span>Escolher Plano</span>
+                </a>
+              </div>
+
+              <ul class="pricing-features">
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Treinos objetivos em blocos de 45 min</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Acesso à aplicação móvel com vídeos</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Diagnóstico e estratégia inicial de rotina</span>
+                </li>
+                <li class="pricing-feature-item excluded">
+                  <span class="icon-circle">
+                    <span class="material-symbols-outlined">close</span>
+                  </span>
+                  <span>Protocolos adaptados a viagens e hotéis</span>
+                </li>
+                <li class="pricing-feature-item excluded">
+                  <span class="icon-circle">
+                    <span class="material-symbols-outlined">close</span>
+                  </span>
+                  <span>Suporte prioritário 24/7 via WhatsApp</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CARD 2: Programa Trimestral (Destaque) -->
+          <div class="spotlight-card" data-reveal style="--d:0.15s">
+            <div class="inner-card card-dark-2">
+              <div class="badge-featured">
+                Mais Escolhido
+              </div>
+
+              <div class="pricing-eyebrow">
+                Programa Trimestral
+              </div>
+              <div class="pricing-divider"></div>
+
+              <div class="pricing-price-row">
+                <span class="price-val">175€</span>
+                <span class="price-orig">245€</span>
+              </div>
+
+              <p class="pricing-card-desc">
+                3 meses de performance. Adaptação física, recomposição corporal e consistência.
+              </p>
+
+              <div class="pricing-btn-wrap">
+                <a href="#questionario" data-plan="trimestral" class="btn-spotlight btn-primary-spot">
+                  <span>Escolher Plano</span>
+                </a>
+              </div>
+
+              <ul class="pricing-features">
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Treinos objetivos em blocos de 45 min</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Acesso à aplicação móvel com vídeos</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Diagnóstico e estratégia inicial de rotina</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Protocolos adaptados a viagens e hotéis</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Check-ins e métricas de evolução semanais</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- CARD 3: Programa Semestral -->
+          <div class="spotlight-card" data-reveal style="--d:0.25s">
+            <div class="inner-card card-dark-1">
+              <div class="pricing-eyebrow">
+                Programa Semestral
+              </div>
+              <div class="pricing-divider"></div>
+
+              <div class="pricing-price-row">
+                <span class="price-val">320€</span>
+                <span class="price-orig">450€</span>
+              </div>
+
+              <p class="pricing-card-desc">
+                6 meses de transformação. Consolidação de hábitos e máxima estabilidade de rotina.
+              </p>
+
+              <div class="pricing-btn-wrap">
+                <a href="#questionario" data-plan="semestral" class="btn-spotlight btn-secondary-spot">
+                  <span>Escolher Plano</span>
+                </a>
+              </div>
+
+              <ul class="pricing-features">
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Treinos objetivos em blocos de 45 min</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Acesso à aplicação móvel com vídeos</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Diagnóstico e estratégia inicial de rotina</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Protocolos flexíveis para viagens e hotéis</span>
+                </li>
+                <li class="pricing-feature-item included">
+                  <span class="icon-circle included">
+                    <span class="material-symbols-outlined">check</span>
+                  </span>
+                  <span>Suporte contínuo e canal direto com o Ale</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MODALIDADES -->
+    <section class="modes" id="modalidades" aria-labelledby="h-mod">
+      <div class="wrap">
+        <div class="head" data-reveal>
+          <p class="kicker">Formatos de Atendimento</p>
+          <h2 id="h-mod">Presencial em Portugal. <em>Online onde os teus negócios estiverem.</em></h2>
+          <p class="lead muted">Sessões individuais reservadas em Portugal ou consultoria executiva 100% online através da aplicação móvel.</p>
+        </div>
+        <div class="mode-grid" id="modes"></div>
+      </div>
+    </section>
+
+    <!-- FAQ (DESIGN MODERNO DARK COM SIDEBAR E CARDS INDIVIDUAIS) -->
+    <section class="faq-sec" id="faq" aria-labelledby="h-faq">
+      <div class="faq-wrap">
+        <!-- HEADER -->
+        <div class="faq-header">
+          <div class="faq-header-left" data-reveal>
+            <span class="faq-pill">
+              <span class="dot"></span>
+              FAQ
+            </span>
+            <h2 id="h-faq" class="faq-title">
+              Perguntas frequentes<br class="br-hide"> que mais recebemos.
+            </h2>
+          </div>
+          <div class="faq-header-right" data-reveal style="--d:0.15s">
+            <p class="faq-desc">
+              Tudo o que precisas de saber sobre o método de treino em 45 minutos, acompanhamento presencial em Portugal e consultoria executiva online.
+            </p>
+          </div>
+        </div>
+
+        <!-- MAIN LAYOUT: SIDEBAR + ACCORDION CARDS -->
+        <div class="faq-body">
+          <!-- SIDEBAR ESQUERDA -->
+          <aside class="faq-sidebar" data-reveal style="--d:0.1s">
+            <!-- TABS DE CATEGORIAS -->
+            <div class="faq-tabs" role="tablist" aria-label="Categorias de Perguntas">
+              <button type="button" class="faq-tab active" data-cat="all" role="tab" aria-selected="true">
+                Geral
+              </button>
+              <button type="button" class="faq-tab" data-cat="metodo" role="tab" aria-selected="false">
+                Método 45min
+              </button>
+              <button type="button" class="faq-tab" data-cat="atendimento" role="tab" aria-selected="false">
+                Presencial &amp; Online
+              </button>
+            </div>
+
+            <!-- CARD "TENS DÚVIDAS?" -->
+            <div class="faq-help-card">
+              <h3 class="help-title">Tens dúvidas?</h3>
+              <p class="help-desc">
+                Precisas de ajuda ou queres esclarecer alguma questão específica sobre a tua rotina? Fala diretamente com o Ale.
+              </p>
+              <a href="#" class="help-link" data-wa="general" target="_blank" rel="noopener">
+                <span>Falar no WhatsApp</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </aside>
+
+          <!-- LISTA DE CARDS ACCORDION DIREITA -->
+          <div class="faq-list" id="faq-list" role="region" aria-label="Respostas às Perguntas Frequentes"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final dark" id="contacto" aria-labelledby="h-final">
+      <div class="wrap">
+        <h2 id="h-final">Ainda tens dúvidas sobre a tua rotina? <em class="hl hl-d">Vamos conversar.</em></h2>
+        <p class="lead">Agenda a tua Sessão Estratégica individual e percebe como encaixar o treino no teu dia a dia sem perder tempo.</p>
+        <a class="btn btn-light btn-xl" data-wa="general" href="#" target="_blank" rel="noopener">
+          Falar com o Ale Braga
+          <svg class="arr" aria-hidden="true"><use href="#arrow"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="ftr dark" id="rodape">
+    <div class="beam" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="f-top">
+        <div class="f-brand">
+          <a class="logo" href="#inicio" aria-label="Ale Braga, Performance para Empresários. Início">
+            <span class="logo-img" aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="f-links">
+          <nav aria-label="Rodapé">
+            <h4>Navegação</h4>
+            <ul class="f-nav" id="f-nav"></ul>
+          </nav>
+          <div>
+            <h4>Contacto</h4>
+            <div class="f-social">
+              <a class="gl" data-wa="general" href="#" target="_blank" rel="noopener">
+                <svg aria-hidden="true"><use href="#wa"/></svg>
+                WhatsApp
+              </a>
+              <a class="gl" data-ig href="https://www.instagram.com/eualebraga/" target="_blank" rel="noopener">
+                <svg aria-hidden="true"><use href="#ig"/></svg>
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="f-bottom">
+        <p>© 2026 Ale Braga. Todos os direitos reservados. · Performance para Empresários · Portugal &amp; Global</p>
+        <a class="f-top-btn" href="#inicio" aria-label="Voltar ao topo">
+          <svg aria-hidden="true"><use href="#arrow"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="wm pre" id="wm" aria-hidden="true">
+      <span class="wm-in" id="wm-in"></span>
+    </div>
+  </footer>
+
+  <!-- BOTÃO FLUTUANTE WHATSAPP -->
+  <a class="wa" id="wa-float" data-wa="general" href="#" aria-label="Falar com o Ale Braga no WhatsApp" target="_blank" rel="noopener">
+    <svg aria-hidden="true"><use href="#wa"/></svg>
+  </a>
+
+  <noscript>
+    <p style="padding:16px;text-align:center;background:#101014;color:#FFFFFF">
+      Para ver todo o conteúdo ativa o JavaScript ou fala diretamente com o Ale Braga pelo WhatsApp.
+    </p>
+  </noscript>
+
+  <script src="app.js?v=20261118_v16"></script>
 </body>
 </html>
